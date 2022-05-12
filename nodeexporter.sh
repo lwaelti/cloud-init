@@ -1,12 +1,11 @@
 #!/bin/bash
 
-wget "https://github.com/prometheus/node_exporter/releases/download/v$version/node_exporter-$version.$arch.tar.gz"
+wget https://github.com/prometheus/node_exporter/releases/download/v*/node_exporter-*.*-amd64.tar.gz
+tar xvfz node_exporter-*.*-amd64.tar.gz
+cd node_exporter-*.*-amd64
+./node_exporter
 
-tar xfz node_exporter.tar.gz
-
-cp node_exporter /usr/local/bin/node_exporter
-
-chown root:staff /usr/local/bin/node_exporter
+chown root:staff node_exporter
 
 cat <<EOF > /etc/systemd/system/node_exporter.service
 [Unit]

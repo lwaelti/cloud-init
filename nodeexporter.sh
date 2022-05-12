@@ -4,6 +4,10 @@ wget "https://github.com/prometheus/node_exporter/releases/download/v$version/no
 
 tar xfz node_exporter.tar.gz
 
+cp node_exporter /usr/local/bin/node_exporter
+
+chown root:staff /usr/local/bin/node_exporter
+
 cat <<EOF > /etc/systemd/system/node_exporter.service
 [Unit]
 Description=Prometheus node exporter

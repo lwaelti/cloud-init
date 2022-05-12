@@ -21,14 +21,20 @@ global:
   scrape_interval:     10s
   evaluation_interval: 10s
 rule_files:
-  # - "first.rule"
-  # - "second.rule"
+  # - "first.rules"
+  # - "second.rules"
 scrape_configs:
-  - job_name: prometheus
+  - job_name: nodeexporter01
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['192.168.66.237:9100']
+  - job_name: nodeexporter02
+    static_configs:
+      - targets: ['192.168.66.231:9100']
+  - job_name: nodeexporter03
+    static_configs:
+      - targets: ['192.168.66.234']
 EOF
 
 sudo docker run -d -p 9090:9090 -v /home/dockerroot/prometheus.yml:/etc/prometheus/prometheus.yml --name=prometheus prom/prometheus
-#sudo docker run -d --name prometheus-container -e TZ=CET -p 30090:9090 ubuntu/prometheus:2.33-22.04_beta
+
 sudo docker run -d --name grafana-container -e TZ=CET -p 3000:3000 grafana/grafana-oss
